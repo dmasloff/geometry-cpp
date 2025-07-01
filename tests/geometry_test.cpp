@@ -1,4 +1,4 @@
-#include "geometry.h"
+#include "../src/geometry.h"
 
 #include <cassert>
 #include <iostream>
