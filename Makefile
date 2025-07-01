@@ -1,12 +1,12 @@
 build: test_simple test_simple_opt test_ubsan
 
-test_simple: geometry_test.cpp geometry.h
+test_simple: tests/geometry_test.cpp geometry.h
 	clang++ -std=c++20 -gdwarf-4 -O0 -Wall -Wextra -Werror -o ./test_simple geometry_test.cpp geometry.cpp
 
-test_simple_opt: geometry_test.cpp geometry.h
+test_simple_opt: tests/geometry_test.cpp geometry.h
 	clang++ -std=c++20 -O2 -Wall -Wextra -Werror -o ./test_simple_opt geometry_test.cpp geometry.cpp
 
-test_ubsan: geometry_test.cpp geometry.h
+test_ubsan: tests/geometry_test.cpp geometry.h
 	clang++ -std=c++20 -g -O0 -Wall -Wextra -Werror -fsanitize=undefined -o ./test_ubsan geometry_test.cpp geometry.cpp
 
 info:
