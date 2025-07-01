@@ -27,20 +27,20 @@ run: build
 
 lint:
 	@echo 'Check code is formatted'
-	clang-format --style=file --dry-run --Werror *.h *.cpp
+	clang-format --style=file --dry-run --Werror src/*.h src/*.cpp
 	@echo 'Run linter'
-	clang-tidy --config "$(shell cat .clang-tidy)" --warnings-as-errors="*"  geometry_test.cpp geometry.cpp '-header-filter=.*' -- -std=c++20 -g -O0 -Wall -Wextra -Werror
+	clang-tidy --config "$(shell cat .clang-tidy)" --warnings-as-errors="*"  tests/geometry_test.cpp src/geometry.cpp '-header-filter=.*' -- -std=c++20 -g -O0 -Wall -Wextra -Werror
 	@echo 'Check NOLINT is not used'
-	! grep NOLINT geometry.h geometry.cpp
+	! grep NOLINT src/geometry.h src/geometry.cpp
 	@echo 'Check all TODOs are removed'
-	! grep TODO geometry.h geometry.cpp
+	! grep TODO src/geometry.h src/geometry.cpp
 
 test: info run lint
 	@echo 'Great job!'
 
 format:
 	@echo 'Apply linter fixes'
-	clang-tidy --config "$(shell cat .clang-tidy)" --fix geometry_test.cpp geometry.cpp '-header-filter=.*' -- -std=c++20 -g -O0 -Wall -Wextra -Werror
+	clang-tidy --config "$(shell cat .clang-tidy)" --fix tests/geometry_test.cpp src/geometry.cpp '-header-filter=.*' -- -std=c++20 -g -O0 -Wall -Wextra -Werror
 	@echo 'Apply formatter'
 	clang-format --style=file -i *.h *.cpp
 
